@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { LogResponse } from 'src/decorators/log-response.decorator';
+import { ErrorHandler } from 'src/decorators/error-handler.decorator';
 @Injectable()
 export class UserService {
   create(createUserDto: CreateUserDto) {
@@ -12,10 +13,10 @@ export class UserService {
     return `This action returns all user`;
   }
 
-  @LogResponse()
+  @ErrorHandler()
   findOne(id: number) {
+    throw new Error('Error in findOne');
     const result = `This action returns a #${id} user`;
-    console.log(result);
     return result;
   }
 
